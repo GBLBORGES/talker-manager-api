@@ -22,17 +22,33 @@ return talkerGetById;
 }
 };
 
-const generateToken = async () => {
-  try {      
+const generateToken = () => {       
     const token = crypto.randomBytes(8).toString('hex');    
-    return token;
-  } catch (err) {
-    console.error(`o erro foi: ${err.message}`);  
-  }
+    return token; 
+};
+
+const creatTalker = async (name, age, talk) => {
+  const allTalkers = await talkerModel.readFile();
+  const { rate, watchedAt } = talk;
+  const newId = allTalkers.length + 1;
+  const objTalker = {
+    name,
+    age,
+    id: newId,
+    talk: {
+      rate,
+      watchedAt,
+    },
+  };
+  allTalkers.push(objTalker);    
+  await talkerModel.writeFile(allTalkers);
+  console.log(objTalker);
+  return objTalker;
 };
 
 module.exports = {
   getAll,
   getById,
-  generateToken,  
+  generateToken,
+  creatTalker,  
 };

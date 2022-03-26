@@ -8,14 +8,16 @@ app.use(bodyParser.json());
 const HTTP_OK_STATUS = 200;
 const PORT = '3000';
 
-// não remova esse endpoint, e para o avaliador funcionar
 app.get('/', (_request, response) => {
   response.status(HTTP_OK_STATUS).send();
 });
 app.get('/talker', talker.getAll);
 app.get('/talker/:id', talker.getById);
 app.post('/login', talker.login);
-
+app.post('/talker', talker.authMiddleware, talker.nameVerifyMiddleware,
+ talker.ageVerifyMiddleware, talker.talkVerifyMiddleware, talker.rateVerifyMiddleware,
+  talker.watchedAtVerifyMiddleware, talker.creatTalker);
+ 
 app.listen(PORT, () => {
   console.log('Online');
 });

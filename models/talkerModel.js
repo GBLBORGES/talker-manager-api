@@ -8,12 +8,9 @@ const allTalkers = JSON.parse(buffer);
 return allTalkers;
 };
 
-const writeFile = async (objTalker) => {
-  const buffer = await fs.readFile(talkerDataBasePath);
-  const allTalkers = JSON.parse(buffer);
-  allTalkers.push(objTalker);
-  const stringData = JSON.stringify(allTalkers);
-  fs.writeFile(talkerDataBasePath, stringData);  
+const writeFile = async (objTalker) => {   
+  const stringData = JSON.stringify(objTalker);
+  fs.writeFile(talkerDataBasePath, stringData);   
 };
 
 module.exports = {
