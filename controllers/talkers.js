@@ -23,13 +23,14 @@ try {
 
 const login = async (request, response) => {
   try {
-    const { email, password } = request.body;
+    const { email, password } = request.body;     
     const statusLogin = loginVerify(email, password);
-    if (statusLogin.message) return response.status(400).json(statusLogin);    
-    const token = await talkerServices.generateToken(email, password);    
-    response.status(200).json(token);
+    console.log(statusLogin);    
+       if (statusLogin.message) return response.status(400).json(statusLogin);    
+    const cryptoToken = await talkerServices.generateToken();    
+    return response.status(200).json({ token: cryptoToken });    
   } catch (error) {
-    console.error(`o erro foi: ${error.message}`);  
+    console.error(`o erro foi: ${error}`);  
   }
 };
 

@@ -24,7 +24,7 @@ return talkerGetById;
 
 const generateToken = async () => {
   try {      
-    const token = crypto.randomBytes(8).toString('hex');
+    const token = crypto.randomBytes(8).toString('hex');    
     return token;
   } catch (err) {
     console.error(`o erro foi: ${err.message}`);  
