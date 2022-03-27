@@ -63,10 +63,18 @@ const updateTalker = async (name, age, talk, idString) => {
     return allTalkers[position];
 };
 
+const deleteById = async (id) => {
+  const allTalkers = await talkerModel.readFile();
+  const index = allTalkers.findIndex((talker) => talker.id === +id);  
+  allTalkers.splice(index, 1);  
+  await talkerModel.writeFile(allTalkers);  
+};
+
 module.exports = {
   getAll,
   getById,
   generateToken,
   creatTalker, 
-  updateTalker, 
+  updateTalker,
+  deleteById, 
 };

@@ -21,6 +21,8 @@ app.post('/talker', talker.authMiddleware, talker.nameVerifyMiddleware,
 app.put('/talker/:id', talker.authMiddleware, talker.nameVerifyMiddleware,
 talker.ageVerifyMiddleware, talker.talkVerifyMiddleware, talker.rateVerifyMiddleware, 
  talker.watchedAtVerifyMiddleware, talker.updateById);
+
+app.delete('/talker/:id', talker.authMiddleware, talker.deleteById);
  
 app.listen(PORT, () => {
   console.log('Online');

@@ -34,7 +34,7 @@ const login = async (request, response) => {
 };
 
 const authMiddleware = (request, response, next) => {
-  try {
+  try {    
     const { authorization } = request.headers;    
     if (!authorization) {
       return response.status(401).json({ message: 'Token não encontrado' });
@@ -115,12 +115,19 @@ const updateById = async (request, response) => {
  return response.status(200).json(talker);
 };
 
+const deleteById = async (request, response) => {
+  const { id } = request.params;  
+  await talkerServices.deleteById(id);
+  return response.status(204).end();
+};
+
 module.exports = {
   getAll,
   getById,
   login,  
   creatTalker,  
   updateById,
+  deleteById,
   authMiddleware,
   nameVerifyMiddleware,
   ageVerifyMiddleware,
