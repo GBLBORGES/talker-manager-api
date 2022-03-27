@@ -15,8 +15,12 @@ app.get('/talker', talker.getAll);
 app.get('/talker/:id', talker.getById);
 app.post('/login', talker.login);
 app.post('/talker', talker.authMiddleware, talker.nameVerifyMiddleware,
- talker.ageVerifyMiddleware, talker.talkVerifyMiddleware, talker.rateVerifyMiddleware,
-  talker.watchedAtVerifyMiddleware, talker.creatTalker);
+  talker.ageVerifyMiddleware, talker.talkVerifyMiddleware, talker.rateVerifyMiddleware,
+    talker.watchedAtVerifyMiddleware, talker.creatTalker);
+
+app.put('/talker/:id', talker.authMiddleware, talker.nameVerifyMiddleware,
+talker.ageVerifyMiddleware, talker.talkVerifyMiddleware, talker.rateVerifyMiddleware, 
+ talker.watchedAtVerifyMiddleware, talker.updateById);
  
 app.listen(PORT, () => {
   console.log('Online');

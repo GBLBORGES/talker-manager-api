@@ -24,8 +24,7 @@ try {
 const login = async (request, response) => {
   try {
     const { email, password } = request.body;     
-    const statusLogin = loginVerify(email, password);
-    console.log(statusLogin);    
+    const statusLogin = loginVerify(email, password);      
        if (statusLogin.message) return response.status(400).json(statusLogin);    
     const cryptoToken = talkerServices.generateToken();    
     return response.status(200).json({ token: cryptoToken });    
@@ -36,8 +35,7 @@ const login = async (request, response) => {
 
 const authMiddleware = (request, response, next) => {
   try {
-    const { authorization } = request.headers;
-    console.log(authorization);
+    const { authorization } = request.headers;    
     if (!authorization) {
       return response.status(401).json({ message: 'Token não encontrado' });
     } if (authorization.length !== 16) {
@@ -50,8 +48,7 @@ const authMiddleware = (request, response, next) => {
 };
 
 const nameVerifyMiddleware = (request, response, next) => {  
-    const { name } = request.body;
-    console.log(name);
+    const { name } = request.body;    
     if (!name || name === '') {
      return response.status(400).json({ message: 'O campo "name" é obrigatório' });
     }
@@ -61,8 +58,7 @@ const nameVerifyMiddleware = (request, response, next) => {
 };
 const ageVerifyMiddleware = (request, response, next) => {  
     const { age } = request.body;  
-    console.log(age);
-    if (!age || age.length < 1) {
+      if (!age || age.length < 1) {
      return response.status(400).json({ message: 'O campo "age" é obrigatório' });
     }
     if (+age < 18) {
@@ -71,36 +67,37 @@ const ageVerifyMiddleware = (request, response, next) => {
 };
 
 const talkVerifyMiddleware = (request, response, next) => {  
-  const { talk } = request.body; 
-  console.log(talk);
-  if (!talk || talk === '' || !talk.watchedAt || !talk.rate) {
+  const { talk } = request.body;   
+  if (!talk || talk === '' || !talk.watchedAt || talk.rate === undefined) {    
     return response.status(400)
     .json({ message: 'O campo "talk" é obrigatório e "watchedAt" e "rate" não podem ser vazios' });
-  }
+  }  
   next();   
 };
 
 const rateVerifyMiddleware = (request, response, next) => {
-  const { talk: { rate } } = request.body;
-  console.log(rate);
-  if (!Number.isInteger(rate) || rate > 5 || rate < 1) {
+  const { talk } = request.body;  
+  if (talk.rate === null) {
+    return response.status(400)
+    .json({ message: 'O campo "talk" é obrigatório e "watchedAt" e "rate" não podem ser vazios' });
+  } 
+  if (!Number.isInteger(talk.rate) || talk.rate > 5 || talk.rate < 1) {    
     return response.status(400).json({ message: 'O campo "rate" deve ser um inteiro de 1 à 5' });
   } 
   next();
 };
 
-const watchedAtVerifyMiddleware = (resquest, response, next) => {  
-  const { talk: { watchedAt } } = resquest.body;
+const watchedAtVerifyMiddleware = (resquest, response, next) => {    
+  const { talk: { watchedAt } } = resquest.body;  
   const arrayNumbers = watchedAt.split('/');  
   if (!(arrayNumbers[0] && arrayNumbers[1] && arrayNumbers[2])) {   
     return response.status(400)
     .json({ message: 'O campo "watchedAt" deve ter o formato "dd/mm/aaaa"' });
   }
+  
   next();
 };
 
-/*   const authorization = request.headers['authorization '];   */ 
-/* const token = talkerServices.generateToken();   */      
 const creatTalker = async (request, response) => {
   try {    
     const { name, age, talk } = request.body;     
@@ -111,11 +108,19 @@ const creatTalker = async (request, response) => {
   }
 };
 
+const updateById = async (request, response) => {
+ const { name, age, talk } = request.body; 
+ const { id } = request.params; 
+ const talker = await talkerServices.updateTalker(name, age, talk, id);
+ return response.status(200).json(talker);
+};
+
 module.exports = {
   getAll,
   getById,
   login,  
   creatTalker,  
+  updateById,
   authMiddleware,
   nameVerifyMiddleware,
   ageVerifyMiddleware,

@@ -41,14 +41,32 @@ const creatTalker = async (name, age, talk) => {
     },
   };
   allTalkers.push(objTalker);    
-  await talkerModel.writeFile(allTalkers);
-  console.log(objTalker);
+  await talkerModel.writeFile(allTalkers);  
   return objTalker;
+};
+
+const updateTalker = async (name, age, talk, idString) => {
+  const { rate, watchedAt } = talk;
+  const allTalkers = await talkerModel.readFile();    
+    const position = +idString - 1;
+    const id = +idString;
+    allTalkers[position] = {      
+      name,
+      age,
+      id,
+      talk: {
+        rate,
+        watchedAt,
+      },
+    };
+    await talkerModel.writeFile(allTalkers);
+    return allTalkers[position];
 };
 
 module.exports = {
   getAll,
   getById,
   generateToken,
-  creatTalker,  
+  creatTalker, 
+  updateTalker, 
 };
