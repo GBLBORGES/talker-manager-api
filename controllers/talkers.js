@@ -33,18 +33,14 @@ const login = async (request, response) => {
   }
 };
 
-const authMiddleware = (request, response, next) => {
-  try {    
-    const { authorization } = request.headers;    
+const authMiddleware = (request, response, next) => {     
+    const { authorization } = request.headers;      
     if (!authorization) {
       return response.status(401).json({ message: 'Token não encontrado' });
     } if (authorization.length !== 16) {
         return response.status(401).json({ message: 'Token inválido' });
-    } 
-    next();
-  } catch (err) {
-    console.log(`erro na autentificação: ${err}`);
-  }
+    }     
+    next();     
 };
 
 const nameVerifyMiddleware = (request, response, next) => {  
@@ -120,6 +116,23 @@ const deleteById = async (request, response) => {
   await talkerServices.deleteById(id);
   return response.status(204).end();
 };
+const validateQuery = async (request, response, next) => {
+try {
+  const { q } = request.query;  
+  if (q === '' || !q) {
+    const allTalkers = await talkerServices.getAll(); 
+    return response.status(200).json(allTalkers);
+  }
+  next();
+} catch (err) {
+  console.log(err);
+}
+};
+const searchByQuery = async (request, response) => {
+  const { q } = request.query;  
+  const arrayWithTalkers = await talkerServices.searchByQuery(q);
+  return response.status(200).send(arrayWithTalkers); 
+};
 
 module.exports = {
   getAll,
@@ -128,7 +141,9 @@ module.exports = {
   creatTalker,  
   updateById,
   deleteById,
+  validateQuery,  
   authMiddleware,
+  searchByQuery,
   nameVerifyMiddleware,
   ageVerifyMiddleware,
   talkVerifyMiddleware,

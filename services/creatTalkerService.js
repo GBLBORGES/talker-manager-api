@@ -70,6 +70,15 @@ const deleteById = async (id) => {
   await talkerModel.writeFile(allTalkers);  
 };
 
+const searchByQuery = async (query) => {
+  const allTalkers = await talkerModel.readFile();  
+  const matchTalkers = allTalkers.filter((talker) => talker.name.includes(query));
+  if (!matchTalkers) {
+    return ([]);
+  }
+  return matchTalkers;
+};
+
 module.exports = {
   getAll,
   getById,
@@ -77,4 +86,5 @@ module.exports = {
   creatTalker, 
   updateTalker,
   deleteById, 
+  searchByQuery,
 };
