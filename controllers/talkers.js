@@ -131,7 +131,7 @@ try {
 const searchByQuery = async (request, response) => {
   const { q } = request.query;  
   const arrayWithTalkers = await talkerServices.searchByQuery(q);
-  return response.status(200).send(arrayWithTalkers); 
+  return response.status(200).json(arrayWithTalkers); 
 };
 
 module.exports = {
