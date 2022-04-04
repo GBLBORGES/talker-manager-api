@@ -40,6 +40,7 @@ Este projeto está sob a licença (sua licença) - veja o arquivo [LICENSE.md](h
 
 ![npm](https://img.shields.io/badge/-NPM-red?logo=NPM)
 
+![insomnia](https://img.shields.io/badge/-insomnia-675ECE?logo=insomnia)
 
 ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
 
@@ -56,30 +57,31 @@ Este projeto está sob a licença (sua licença) - veja o arquivo [LICENSE.md](h
 ## Funcionamento do projeto 
 
 
-- GetAll | Requisição de todos os palestrantes .
+- GetAll | Requisição de todos os palestrantes.
+
 <img src="https://media.giphy.com/media/9Iz7NW7sNxjV6PX1VO/giphy.gif" alt="gif resquest all talkers on api">
 
 - GetById | Requisição do palestrando com o id selecionado.
 
-  <img src="https://media.giphy.com/media/i8BBOcXEb7G4sch4cK/giphy.gif" alt="gif resquest by id talkers on api">
+<img src="https://media.giphy.com/media/i8BBOcXEb7G4sch4cK/giphy.gif" alt="gif resquest by id talkers on api">
 
-- GetByQuery | Requisição apartir da query quando ?q= {valor que deseja filtrar} .
+- GetByQuery | Requisição apartir da query onde: ?q={valor que deseja filtrar.
 
-  <img src="https://media.giphy.com/media/339uUfJppEThK1LlJN/giphy.gif" alt="gif resquest by query talkers on api">
+<img src="https://media.giphy.com/media/339uUfJppEThK1LlJN/giphy.gif" alt="gif resquest by query talkers on api">
 
-  - postLogin | Gera um token apartir do login utilizando método post.
+- postLogin | Gera um token apartir do login utilizando método post.
 
-  <img src="https://media.giphy.com/media/Oas2MU4kwNcAXpIyAx/giphy.gif" alt="gif login and request token">
+<img src="https://media.giphy.com/media/Oas2MU4kwNcAXpIyAx/giphy.gif" alt="gif login and request token">
 
-  - CreateTalker | Apartir do método post é possivel criar um usuario no banco de dados ou neste casa salvar no arquivo.
+- CreateTalker | Apartir do método post é possivel criar um usuario no banco de dados ou neste casa salvar no arquivo.
 
-  <img src="https://media.giphy.com/media/C9PHiwc3nBOHu04zEJ/giphy.gif" alt="gif create talker on file">
+<img src="https://media.giphy.com/media/C9PHiwc3nBOHu04zEJ/giphy.gif" alt="gif create talker on file">
 
-  - UpdateTalkerById | Apartir do método put é possivel atualizar valores de um palestrante já existente no banco de dados ou neste caso no arquivo.
+- UpdateTalkerById | Apartir do método put é possivel atualizar valores de um palestrante já existente no banco de dados ou neste caso no arquivo.
 
-  <img src="https://media.giphy.com/media/GTE3IVb4U9YzfWGud7/giphy.gif" alt="update talker by Id on api using method put">
+<img src="https://media.giphy.com/media/GTE3IVb4U9YzfWGud7/giphy.gif" alt="update talker by Id on api using method put">
 
-  - deleteById | Apartir do método delete é possivel deletar um palestrante pelo Id do banco de dados ou neste caso do arquivo.
+- deleteById | Apartir do método delete é possivel deletar um palestrante pelo Id do banco de dados ou neste caso do arquivo.
 
-  <img src="https://media.giphy.com/media/GTE3IVb4U9YzfWGud7/giphy.gif" alt="remove talker by Id on api using method delete">
+<img src="https://media.giphy.com/media/GTE3IVb4U9YzfWGud7/giphy.gif" alt="remove talker by Id on api using method delete">
 
