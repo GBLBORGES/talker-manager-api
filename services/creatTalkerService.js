@@ -71,8 +71,7 @@ const deleteById = async (id) => {
 };
 
 const searchByQuery = async (query) => {
-  const allTalkers = await talkerModel.readFile(); 
-  console.log(allTalkers); 
+  const allTalkers = await talkerModel.readFile();  
   const matchTalkers = allTalkers.filter((talker) => talker.name.includes(query));
   if (!matchTalkers) {
     return ([]);
