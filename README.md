@@ -56,7 +56,6 @@ Este projeto está sob a licença (sua licença) - veja o arquivo [LICENSE.md](h
 
 ## Funcionamento do projeto 
 
-
 - GetAll | Requisição de todos os palestrantes.
 
 <img src="https://media.giphy.com/media/9Iz7NW7sNxjV6PX1VO/giphy.gif" alt="gif resquest all talkers on api">
